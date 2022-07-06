@@ -1,0 +1,78 @@
+<!-- <ActionBar title="Register">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onBack()">
+    </NavigationButton>
+</ActionBar> -->
+
+<StackLayout class="login-container" verticalAlignment="center" height="100%">
+    <form class="form" [formGroup]="registerForm">
+        <ScrollView orientation="vertical">
+            <StackLayout class="input-field" verticalAlignment="center" width="1000px" padding="100px" margin="10px 0">
+                <Image src='~/app/assets/occourt-logo.png' stretch="aspectFit" height="600px" margin="0 0 40px 0"></Image>
+                <StackLayout orientation="horizontal">
+                    <Label text="Email" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                    <TextField class="input-rounded" hint="" width="800px" formControlName="email"
+                        verticalAlignment="center">
+                    </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="Password" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                    <TextField class="input-rounded" [secure]="true" hint="" width="800px" formControlName="password">
+                    </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="Confirm Password" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                    <TextField class="input-rounded" [secure]="true" hint="" width="800px" formControlName="confirmPassword">
+                    </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="First Name" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                    <TextField class="input-rounded" hint="" width="800px" formControlName="firstName">
+                    </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="Last Name" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                <TextField class="input-rounded" hint=""  width="800px"
+                    formControlName="lastName">
+                </TextField>
+                </StackLayout>
+                <!-- <StackLayout orientation="horizontal">
+                    <Label text="Address" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                <TextField class="input-rounded" hint=""  width="800px" formControlName="address">
+                </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="City" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                <TextField class="input-rounded" hint="" width="800px" formControlName="city">
+                </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="State" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                <TextField class="input-rounded" hint="" width="800px" formControlName="state">
+                </TextField>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                    <Label text="Zipcode" class="sign-up-text text-left" margin="0" padding="0 0 10 0"
+                        verticalAlignment="center" width="200px"></Label>
+                <TextField class="input-rounded" hint=""  width="800px" formControlName="zipcode">
+                </TextField>
+                </StackLayout> -->
+                <Button text="Register" class="login-btn btn-primary" height="150px" width="800px" margin="100px 0 0 0"
+                    (tap)="onSubmit()"></Button>
+                <StackLayout orientation="horizontal" horizontalAlignment="center" margin="10 0">
+                    <Label text="Already have an account?" class="sign-up-text text-center" margin="0"
+                        padding="0"></Label>
+                    <Label text="Sign In!" class="sign-up-text text-center" margin="0" padding="0 5" color="blue"
+                        (tap)="onLogin()"></Label>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </form>
+</StackLayout>

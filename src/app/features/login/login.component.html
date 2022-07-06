@@ -1,0 +1,29 @@
+<!-- <ActionBar title="Logins">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="onBack()">
+    </NavigationButton>
+</ActionBar> -->
+<GridLayout rows="*, auto">
+    <StackLayout class="login-container" verticalAlignment="center" height="100%" row="0">
+        <form class="form" [formGroup]="loginForm">
+            <StackLayout class="input-field" verticalAlignment="center" width="1000px" padding="100px">
+                <Image src='~/app/assets/occourt-logo.png' stretch="aspectFit" height="600px"></Image>
+                <!-- <Label class="logo" height="100" width="100" margin="40px 0"></Label> -->
+                <TextField class="input-rounded" hint="Email" height="150px" width="800px" formControlName="email">
+                </TextField>
+                <TextField class="input-rounded" [secure]="true" height="150px" hint="Password" width="800px"
+                    formControlName="password"></TextField>
+                <Label text="Forgot Password?" class="sign-up-text text-center" horizontalAlignment="right" margin="0"
+                    padding="0" color="blue"></Label>
+                <CheckBox #CB1 text="Remember Me?" checked="false" width="300px" horizontalAlignment="left"></CheckBox>
+                <Button text="Log In" class="login-btn btn-primary" height="150px" width="800px" margin="100px 0 0 0"
+                    (tap)="onLogin()"></Button>
+                <StackLayout orientation="horizontal" horizontalAlignment="center" margin="10 0">
+                    <Label text="Don't have an account?" class="sign-up-text text-center" margin="0"
+                        padding="0"></Label>
+                    <Label text="Sign Up!" class="sign-up-text text-center" margin="0" padding="0 5" color="blue"
+                        (tap)="onRegister()"></Label>
+                </StackLayout>
+            </StackLayout>
+        </form>
+    </StackLayout>
+</GridLayout>

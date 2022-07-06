@@ -1,0 +1,149 @@
+:root {
+  --primary: #3C78DC;
+  --dark-primary: #2d5bab;
+  --cancel: #e01f37;
+}
+
+
+// src/app.scss
+@import '@nativescript/theme/css/core.css';
+@import '@nativescript/theme/css/default.css';
+
+// applied when device is in light mode
+.ns-light {
+  .bg-primary {
+    background-color: #fdfdfd;
+  }
+
+  .bg-secondary {
+    background-color: #ffffff;
+  }
+
+  .text-primary {
+    color: #444;
+  }
+
+  .text-secondary {
+    color: #777;
+  }
+}
+
+// applied when device is in dark mode
+.ns-dark {
+  .bg-primary {
+    background-color: #212121;
+  }
+
+  .bg-secondary {
+    background-color: #383838;
+  }
+
+  .text-primary {
+    color: #eee;
+  }
+
+  .text-secondary {
+    color: #ccc;
+  }
+}
+
+
+button {
+  font-size: 15;
+  horizontal-align: center;
+}
+
+RadSideDrawer .drawerContentText {
+  font-size: 130;
+  padding: 10;
+}
+
+RadSideDrawer .drawerContentButton {
+  margin: 10;
+  horizontal-align: left;
+}
+
+.sideStackLayout {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-family: "FontAwesome", "fontawesome-webfont";
+}
+
+.sideTitleStackLayout {
+  text-align: center;
+  vertical-align: center;
+}
+
+.sideLabel {
+  padding: 10;
+  font-family: "FontAwesome", "fontawesome-webfont";
+}
+
+.headerLabel {
+  padding: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.sideLightGrayLabel {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+}
+
+.login-container {
+  background-image: url('~/app/assets/blue-shape-background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.input-field {
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.564);
+}
+
+.logo {
+  background-color: black;
+  background-image: url('~/app/assets/occourt-logo.png');
+  height: 100px;
+  width: 100px;
+}
+
+.login-btn {
+  border-radius: 50px;
+}
+
+.input-rounded {
+  padding-left: 30px;
+  // border-width: 1;
+  border-color: white;
+  //background: white;
+  //border-radius: 50px;
+  color: rgb(47, 47, 47);
+}
+
+.sign-up-text{
+  background-color: transparent;
+  white-space: normal;
+}
+
+.bottom-nav{
+  font-family: 'FontAwesome';
+}
+
+.far{
+  font-family: Font Awesome 6 Free, fa-regular-400;
+}
+
+.fa{
+  font-family: FontAwesome, fontawesome-webfont;
+}

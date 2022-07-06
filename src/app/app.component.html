@@ -1,3 +1,4 @@
-<GridLayout>
+<GridLayout rows="*, auto">
   <page-router-outlet></page-router-outlet>
+  <ns-bottom-nav *ngIf="this.isLoggedIn()"></ns-bottom-nav>
 </GridLayout>

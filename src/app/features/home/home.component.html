@@ -1,0 +1,55 @@
+<ActionBar title="NativeFlixr" backgroundColor="white" color="#266fd9">
+  <NavigationButton text="Menu" color="white" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == false" (tap)="openDrawer()"
+    (blur)="onCloseDrawerTap()">
+  </NavigationButton>
+  <NavigationButton text="Menu" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == true" (tap)="onCloseDrawerTap()"
+    (blur)="onCloseDrawerTap()">
+  </NavigationButton>
+</ActionBar>
+
+<GridLayout rows="*, auto">
+  <ListView height="100%" separatorColor="transparent" [items]="flicks" (itemTap)="onFlickTap($event)" row="0">
+    <ng-template let-item="item">
+      <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+      <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10" margin="5 10"
+        padding="0">
+        <image row="0" margin="0" stretch="aspectFill" [src]="item.image"></image>
+        <label row="1" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
+          [text]="item.title"></label>
+        <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14" textWrap="true"
+          [text]="item.description"></label>
+      </GridLayout>
+    </ng-template>
+  </ListView>
+
+  <!-- <BottomNavigationBar class="bottom-nav" activeColor="white" inactiveColor="#ebebeb" backgroundColor="#4f92ff"
+    (tabSelected)="onBottomNavigationTabSelected($event)" (tabPressed)="onBottomNavigationTabPressed($event)" row="1">
+    <BottomNavigationTab class='far' title="&#xf294;First" icon.decode="font://&#xf294;" ></BottomNavigationTab>
+    <BottomNavigationTab title="Second" icon="res://ic_view_list" ></BottomNavigationTab>
+    <BottomNavigationTab title="Third" icon="res://ic_menu" ></BottomNavigationTab>
+    <BottomNavigationTab title="Fourth" icon="res://ic_home"></BottomNavigationTab>
+    <BottomNavigationTab title="Fifth" icon="res://ic_view_list"></BottomNavigationTab>
+  </BottomNavigationBar> -->
+</GridLayout>
+
+
+
+
+<RadSideDrawer>
+  <GridLayout tkDrawerContent rows="56, *" class="sideStackLayout">
+    <StackLayout class="headerContent" row="0" verticalAlignment="center">
+      <Label text="Welcome 'Name'" class="headerLabel text-center"></Label>
+    </StackLayout>
+    <ScrollView row="1">
+      <StackLayout class="sideStackLayout">
+        <Label text="\uf293" class="sideLabel"></Label>
+        <Label text="Promotions" class="sideLabel"></Label>
+        <Label text="Important" class="sideLabel"></Label>
+        <Label text="Starred" class="sideLabel"></Label>
+        <Label text="Sent Mail" class="sideLabel"></Label>
+        <Label text="Drafts" class="sideLabel"></Label>
+        <Label text="Log Out" class="sideLabel" (tap)="onLogout()"></Label>
+      </StackLayout>
+    </ScrollView>
+  </GridLayout>
+</RadSideDrawer>
