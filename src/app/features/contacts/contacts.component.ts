@@ -22,12 +22,16 @@ export class ContactsComponent {
     }
 
   ngOnInit(): void {
-    this.getCourts();
+
   }
 
-  getCourts() {
-    this.contactService.getContacts().subscribe((res) => {
-      this.contacts = res;
-    });
+  getContacts() {
+    this.contactService.getContacts().subscribe(
+      (res) =>{
+        console.log(res);
+
+      }
+
+    );
   }
 }

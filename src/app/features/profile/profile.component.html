@@ -1,11 +1,11 @@
 <StackLayout>
     <StackLayout class="profile-top-container"  height="45%">
         <Button text="Log Out" (tap)="onTapSettings($event)" horizontalAlignment="right" ></Button>
-        <Image src='~/app/assets/profile-image.png' stretch="aspectFit" height="400px" width="400px" color="white"
-            backgroundColor="white" borderRadius="100%"></Image>
-        <Label text="Jimmy Tran" class="profile-name text-center" margin="20px 0 0 0" padding="0" color="white"
+        <Image [src]='userProfile?.avatar' stretch="aspectFit" height="500px" width="500px" color="white"
+            backgroundColor="white" borderRadius="100%" borderWidth="1" borderColor="white"></Image>
+        <Label [text]="userProfile?.name" class="profile-name text-center" margin="20px 0 0 0" padding="0" color="white"
             fontSize="30px"></Label>
-        <Label text="j4tran@occourts.org" class="profile-name text-center" margin="15px 0 0 0" padding="0" color="white"
+        <Label [text]="userProfile?.email" class="profile-name text-center" margin="15px 0 0 0" padding="0" color="white"
             fontSize="20px"></Label>
     </StackLayout>
     <StackLayout class="profile-middle-container" verticalAlignment="center" height="3%">

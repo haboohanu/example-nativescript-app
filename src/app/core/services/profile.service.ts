@@ -5,7 +5,7 @@ import { catchError, Observable, of, tap, throwError } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
-export class ContactService {
+export class ProfileService {
   baseUrl = "https://localhost:7015/api/";
 
   constructor(private http: HttpClient) {}
@@ -13,10 +13,10 @@ export class ContactService {
   // public getContacts() {
   // 	return this.http.get<any[]>(`${this.baseUrl}Contacts/`);
   // }
-  getContacts() {
+  getProfile() {
     let options = this.createRequestOptions();
     return this.http
-      .get<any[]>("https://api.github.com/users/haboohanu", { headers: options })
+      .get<any>("https://randomuser.me/api/", { headers: options })
       .pipe(
         catchError((error: Error) => {
           return throwError(() => new Error(`Error Message:${error.message} \nError ${error.name}`));
