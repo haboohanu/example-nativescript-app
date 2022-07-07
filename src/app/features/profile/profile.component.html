@@ -1,0 +1,23 @@
+<StackLayout>
+    <StackLayout class="profile-top-container"  height="45%">
+        <Button text="Log Out" (tap)="onTapSettings($event)" horizontalAlignment="right" ></Button>
+        <Image src='~/app/assets/profile-image.png' stretch="aspectFit" height="400px" width="400px" color="white"
+            backgroundColor="white" borderRadius="100%"></Image>
+        <Label text="Jimmy Tran" class="profile-name text-center" margin="20px 0 0 0" padding="0" color="white"
+            fontSize="30px"></Label>
+        <Label text="j4tran@occourts.org" class="profile-name text-center" margin="15px 0 0 0" padding="0" color="white"
+            fontSize="20px"></Label>
+    </StackLayout>
+    <StackLayout class="profile-middle-container" verticalAlignment="center" height="3%">
+    </StackLayout>
+    <StackLayout class="bottom-container"  height="50%" backgroundColor="#f5f5f5">
+        <Button text="Search History                                                                        >" (tap)="onTapSettings($event)" horizontalAlignment="stretch" margin="0" padding="0"></Button>
+        <Button text="Appointment History                                                             >" (tap)="onTapSettings($event)" width="100%" margin="0" padding="0"></Button>
+        <Button text="Payment History                                                                    >" (tap)="onTapSettings($event)" width="100%" margin="0" padding="0"></Button>
+        <Button text="Account Settings                                                                  >" (tap)="onTapSettings($event)" width="100%" margin="0 0 10 0" padding="0"></Button>
+        <Button text="Help                                                                                        >" (tap)="onTapSettings($event)" width="100%" margin="0" padding="0"></Button>
+        <Button text="Terms & Conditions                                                               >" (tap)="onTapSettings($event)" width="100%" margin="0" padding="0"></Button>
+        <Button text="Privacy Policy                                                                         >" (tap)="onTapSettings($event)" width="100%" margin="0" padding="0"></Button>
+
+    </StackLayout>
+</StackLayout>

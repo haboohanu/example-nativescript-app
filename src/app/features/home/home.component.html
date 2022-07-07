@@ -1,10 +1,13 @@
-<ActionBar title="NativeFlixr" backgroundColor="white" color="#266fd9">
-  <NavigationButton text="Menu" color="white" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == false" (tap)="openDrawer()"
-    (blur)="onCloseDrawerTap()">
+<ActionBar title="OC Court" backgroundColor="white" color="#266fd9">
+  <NavigationButton text="Menu" color="white" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == false"
+    (tap)="openDrawer()">
   </NavigationButton>
-  <NavigationButton text="Menu" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == true" (tap)="onCloseDrawerTap()"
-    (blur)="onCloseDrawerTap()">
+  <NavigationButton text="Menu" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == true" (tap)="onCloseDrawerTap()">
   </NavigationButton>
+  <StackLayout orientation="horizontal" horizontalAlignment="left">
+    <Label text="OC" class="action-label" fontSize="20px" color="orange" paddingRight="5"></Label>
+    <Label text="Court" class="action-label" fontSize="20px" color="#266fd9"></Label>
+  </StackLayout>
 </ActionBar>
 
 <GridLayout rows="*, auto">
@@ -35,19 +38,16 @@
 
 
 
-<RadSideDrawer>
+<RadSideDrawer (drawerClosed)="onClosed()">
   <GridLayout tkDrawerContent rows="56, *" class="sideStackLayout">
     <StackLayout class="headerContent" row="0" verticalAlignment="center">
-      <Label text="Welcome 'Name'" class="headerLabel text-center"></Label>
+      <Label text="Welcome Jimmy" class="headerLabel text-center"></Label>
     </StackLayout>
     <ScrollView row="1">
       <StackLayout class="sideStackLayout">
-        <Label text="\uf293" class="sideLabel"></Label>
-        <Label text="Promotions" class="sideLabel"></Label>
-        <Label text="Important" class="sideLabel"></Label>
-        <Label text="Starred" class="sideLabel"></Label>
-        <Label text="Sent Mail" class="sideLabel"></Label>
-        <Label text="Drafts" class="sideLabel"></Label>
+        <Label text="Search Case By Case Number" class="sideLabel"></Label>
+        <Label text="Search Case By Date" class="sideLabel"></Label>
+        <Label text="Favorites" class="sideLabel"></Label>
         <Label text="Log Out" class="sideLabel" (tap)="onLogout()"></Label>
       </StackLayout>
     </ScrollView>

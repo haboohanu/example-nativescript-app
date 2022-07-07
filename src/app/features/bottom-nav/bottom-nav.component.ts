@@ -14,18 +14,20 @@ export class BottomNavComponent {
   constructor(private routerExtensions: RouterExtensions) {}
 
   onBottomNavigationTabSelected(event: TabSelectedEventData) {
-    console.log(event.newIndex);
     switch (event.newIndex) {
       case 0:
         this.routerExtensions.navigate(["home"]);
         break;
       case 1:
-        this.routerExtensions.navigate(["appointments"]);
+        this.routerExtensions.navigate(["home"]);
         break;
       case 2:
-        this.routerExtensions.navigate(["contacts"]);
+        this.routerExtensions.navigate(["home"]);
         break;
       case 3:
+        this.routerExtensions.navigate(["appointments"]);
+        break;
+      case 4:
         this.routerExtensions.navigate(["profile"]);
         break;
     }

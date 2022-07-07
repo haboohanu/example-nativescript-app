@@ -52,7 +52,7 @@ button {
   font-size: 15;
   horizontal-align: center;
 }
-
+// side nav ------------------------------------------------------------------------
 RadSideDrawer .drawerContentText {
   font-size: 130;
   padding: 10;
@@ -65,7 +65,9 @@ RadSideDrawer .drawerContentButton {
 
 .sideStackLayout {
   background-color: rgba(0, 0, 0, 0.6);
+  background-color: #f5f5f5;
   color: white;
+  color: #266fd9;
   font-family: "FontAwesome", "fontawesome-webfont";
 }
 
@@ -91,13 +93,15 @@ RadSideDrawer .drawerContentButton {
   align-items: center;
   justify-content: center;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
+  //background-color: rgba(0, 0, 0, 0.6);
 }
 
 .sideLightGrayLabel {
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
 }
+
+// login ------------------------------------------------------------------------
 
 .login-container {
   background-image: url('~/app/assets/blue-shape-background.jpg');
@@ -135,6 +139,17 @@ RadSideDrawer .drawerContentButton {
   background-color: transparent;
   white-space: normal;
 }
+
+// profile ---------------------------------------------------------------------
+.profile-top-container{
+  background: linear-gradient(to bottom, #266fd9, #266fd9, #266fd9,#266fd9,#266fd9,#266fd9);
+}
+.profile-middle-container{
+  background: linear-gradient(to bottom, #266ed98d, #266ed98d);
+}
+
+
+
 
 .bottom-nav{
   font-family: 'FontAwesome';

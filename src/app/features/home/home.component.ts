@@ -92,4 +92,9 @@ public onCloseDrawerTap() {
   console.log("Close SideDrawer tapped.");
     this.drawer.closeDrawer();
   }
+
+  onClosed(){
+    this.drawerIsOpen = false;
+  }
+
 }
