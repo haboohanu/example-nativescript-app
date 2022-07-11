@@ -1,4 +1,4 @@
-<DatePicker year="1980" month="4" day="20"
+<!-- <DatePicker year="1980" month="4" day="20"
             [minDate]="minDate" [maxDate]="maxDate"
             (dateChange)="onDateChanged($event)"
             (dayChange)="onDayChanged($event)"
@@ -6,4 +6,8 @@
             (yearChange)="onYearChanged($event)"
             (loaded)="onDatePickerLoaded($event)"
             verticalAlignment="center">
-</DatePicker>
+</DatePicker> -->
+<StackLayout>
+    <DatePickerField hint="select date" ></DatePickerField>
+    <TimePickerField hint="select time"></TimePickerField>
+</StackLayout>

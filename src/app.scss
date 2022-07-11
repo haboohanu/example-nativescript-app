@@ -4,10 +4,19 @@
   --cancel: #e01f37;
 }
 
+*{
+  font-family: 'Roboto-Regular'
+}
+
+.action-label{
+  font-family: 'Roboto-Bold'
+}
+
 
 // src/app.scss
 @import '@nativescript/theme/css/core.css';
 @import '@nativescript/theme/css/default.css';
+
 
 // applied when device is in light mode
 .ns-light {
@@ -136,17 +145,66 @@ RadSideDrawer .drawerContentButton {
 }
 
 .sign-up-text{
-  background-color: transparent;
   white-space: normal;
+  font-family: 'Roboto-Regular'
 }
 
 // profile ---------------------------------------------------------------------
 .profile-top-container{
-  background: linear-gradient(to bottom, #266fd9, #266fd9, #266fd9,#266fd9,#266fd9,#266fd9);
+  //background: linear-gradient(to bottom, #266fd9, #266fd9, #266fd9,#266fd9,#266fd9,#266fd9);
+  background: #f5f5f5;
+  //background-image: url('~/app/assets/blue-shape-background.jpg');
+  background-size: "200px"
+}
+.profile-top-banner{
+  background-image: url('~/app/assets/blue-shape-background.jpg');
+}
+.info-container{
+  //background-color: rgba(255, 255, 255, 0.564);
 }
 .profile-middle-container{
-  background: linear-gradient(to bottom, #266ed98d, #266ed98d);
+  //background: linear-gradient(to bottom, #266ed98d, #266ed98d);
+  //background: rgba(255, 255, 255, 0.564);
+  background: #f5f5f5
 }
+.profile-name{
+  font-family: "Roboto-Bold";
+}
+.profile-email{
+  font-family: "Roboto-Light";
+}
+.profile-bottom-container{
+  font-family: "Roboto-Regular"
+}
+ListView {
+  separator-color: black;
+  separator-size: 20px;
+}
+.list-group{
+}
+
+
+// profile-edit --------------------------------------------------
+.profile-edit-text{
+  white-space: normal;
+  font-family: 'Roboto-Regular'
+}
+.profile-input-field {
+  border-radius: 25px;
+  background-color: rgb(255, 255, 255);
+}
+.profile-input {
+  padding-left: 30px;
+  // border-width: 1;
+  border-color: black;
+  //background: white;
+  //border-radius: 50px;
+  color: rgb(47, 47, 47);
+}
+.profile-save-btn {
+  border-radius: 50px;
+}
+
 
 
 
@@ -156,9 +214,21 @@ RadSideDrawer .drawerContentButton {
 }
 
 .far{
-  font-family: Font Awesome 6 Free, fa-regular-400;
+  font-family: 'fa-regular-400';
 }
 
 .fa{
   font-family: FontAwesome, fontawesome-webfont;
+}
+.rr{
+  font-family: 'Roboto-Regular'
+}
+.rb{
+  font-family: 'Roboto-Bold'
+}
+.rt{
+  font-family: 'Roboto-Thin'
+}
+.rl{
+  font-family: 'Roboto-Light'
 }

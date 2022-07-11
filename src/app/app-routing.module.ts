@@ -26,12 +26,21 @@ const routes: Routes = [
     loadChildren: () => import('./features/appointments/appointments.module').then(m => m.AppointmentsModule)
   },
   {
+    path: 'civil',
+    loadChildren: () => import('./features/civil/civil.module').then(m => m.CivilModule)
+  },
+  {
     path: 'contacts',
     loadChildren: () => import('./features/contacts/contacts.module').then(m => m.ContactsModule)
   },
   {
     path: 'profile',
     loadChildren: () => import('./features/profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
+    path: 'profile/edit',
+    loadChildren: () =>
+      import('./features/profile-edit/profile-edit.module').then(m => m.ProfileEditModule)
   },
 ]
 

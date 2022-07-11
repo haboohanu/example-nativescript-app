@@ -22,7 +22,7 @@ export class BottomNavComponent {
         this.routerExtensions.navigate(["home"]);
         break;
       case 2:
-        this.routerExtensions.navigate(["home"]);
+        this.routerExtensions.navigate(["civil"]);
         break;
       case 3:
         this.routerExtensions.navigate(["appointments"]);

@@ -5,7 +5,7 @@
   <NavigationButton text="Menu" android.systemIcon="ic_menu" *ngIf="drawerIsOpen == true" (tap)="onCloseDrawerTap()">
   </NavigationButton>
   <StackLayout orientation="horizontal" horizontalAlignment="left">
-    <Label text="OC" class="action-label" fontSize="20px" color="orange" paddingRight="5"></Label>
+    <Label text="OC" class="action-label" fontSize="20px" color="orange" paddingRight="5" ></Label>
     <Label text="Court" class="action-label" fontSize="20px" color="#266fd9"></Label>
   </StackLayout>
 </ActionBar>
@@ -48,7 +48,6 @@
         <Label text="Search Case By Case Number" class="sideLabel"></Label>
         <Label text="Search Case By Date" class="sideLabel"></Label>
         <Label text="Favorites" class="sideLabel"></Label>
-        <Label text="Log Out" class="sideLabel" (tap)="onLogout()"></Label>
       </StackLayout>
     </ScrollView>
   </GridLayout>

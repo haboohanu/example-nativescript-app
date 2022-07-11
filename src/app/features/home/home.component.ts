@@ -14,6 +14,7 @@ import { AuthService } from "~/app/core/services/auth.service";
 })
 export class HomeComponent implements AfterViewInit {
   flicks = this.flickService.getFlicks();
+  charCode = 0xe903.toString(16)
 
   constructor(
     private flickService: FlickService,
