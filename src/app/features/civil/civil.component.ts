@@ -4,7 +4,7 @@ import { RouterExtensions } from "@nativescript/angular";
 import { Page } from "@nativescript/core";
 import { map } from "rxjs";
 import { CourtService } from "~/app/core/services/court.service";
-import { CaseModel } from "~/app/core/models/case.model";
+import { ClusterModel } from "~/app/core/models/cluster.model";
 import { CourtModel } from "~/app/core/models/court.model";
 
 @Component({
@@ -13,7 +13,7 @@ import { CourtModel } from "~/app/core/models/court.model";
   templateUrl: "civil.component.html",
 })
 export class CivilComponent {
-  dockets: CaseModel[] = [];
+  clusters: ClusterModel[] = [];
   courts: CourtModel[] = [];
 
   constructor(
@@ -22,26 +22,26 @@ export class CivilComponent {
     private page: Page,
     private courtService: CourtService
   ) {
-    page.actionBarHidden = true;
+    //page.actionBarHidden = true;
   }
 
   ngOnInit(): void {
-    this.getDockets();
+    this.getClusters();
     this.getCourts();
   }
 
-  getDockets() {
+  getClusters() {
     this.courtService
-      .getDockets()
+      .getClusters()
       .subscribe((res) => {
         for(let c of res.results){
-          let _case: CaseModel = {
+          let _cluster: ClusterModel = {
             id: c.id,
-            name: c.case_name,
+            clusterName: c.case_name,
             date: c.date_filed,
             judge: c.judges
           }
-          this.dockets.push(_case);
+          this.clusters.push(_cluster);
         }
       });
   }

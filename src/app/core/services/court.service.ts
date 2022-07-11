@@ -11,7 +11,7 @@ export class CourtService {
   constructor(private http: HttpClient) {}
 
 
-  getDockets() {
+  getClusters() {
     let options = this.createRequestOptions();
     return this.http
       .get<any>("https://www.courtlistener.com/api/rest/v3/clusters/", { headers: options })
@@ -35,6 +35,25 @@ export class CourtService {
     let options = this.createRequestOptions();
     return this.http
       .get<any>("https://www.courtlistener.com/api/rest/v3/courts/", { headers: options })
+      .pipe(
+        catchError((error: Error) => {
+          return throwError(() => new Error(`Error Message:${error.message} \nError ${error.name}`));
+        }),
+        map((response) => ({
+          results: response.results,
+        })),
+        tap((res) => {
+          if (res) {
+            return of(true); // getRequest successful
+          }
+        })
+      );
+  }
+
+  getDockets() {
+    let options = this.createRequestOptions();
+    return this.http
+      .get<any>("https://www.courtlistener.com/api/rest/v3/dockets/", { headers: options })
       .pipe(
         catchError((error: Error) => {
           return throwError(() => new Error(`Error Message:${error.message} \nError ${error.name}`));

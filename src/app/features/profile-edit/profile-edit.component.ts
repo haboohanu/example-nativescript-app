@@ -4,6 +4,10 @@ import { ActivatedRoute } from '@angular/router'
 import { RouterExtensions } from '@nativescript/angular'
 import { Page } from '@nativescript/core';
 import { ProfileModel } from '~/app/core/models/profile.model';
+import { requestPermissions } from '@nativescript/camera';
+import * as camera from "@nativescript/camera";
+
+
 
 @Component({
     moduleId: module.id,
@@ -15,6 +19,7 @@ export class ProfileEditComponent {
   userProfile: ProfileModel | undefined = undefined;
 
   profileForm: FormGroup;
+
 
     constructor(
         private activatedRoute: ActivatedRoute,
@@ -63,9 +68,31 @@ export class ProfileEditComponent {
       this.routerExtensions.back();
     }
 
+    onEditPhoto(){
+      requestPermissions().then(
+        function success() {
+          camera.takePicture()
+          .then(function (imageAsset) {
+              console.log("Result is an image asset instance");
+              //var image = new Image();
+              this.userProfile.avatar = imageAsset;
+              console.log(this.userProfile);
+          }).catch(function (err) {
+              console.log("Error -> " + err.message);
+          });
+        },
+        function failure() {
+            // permission request rejected
+            // ... tell the user ...
+        }
+      );
+    }
+
     onSave(){
       this.routerExtensions.back();
     }
+
+
 }
 
 

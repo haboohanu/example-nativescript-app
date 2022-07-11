@@ -42,6 +42,10 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/profile-edit/profile-edit.module').then(m => m.ProfileEditModule)
   },
+  {
+    path: 'selfhelp',
+    loadChildren: () => import('./features/self-help/self-help.module').then(m => m.SelfHelpModule)
+  },
 ]
 
 @NgModule({

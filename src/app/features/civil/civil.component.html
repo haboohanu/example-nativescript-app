@@ -1,11 +1,25 @@
-<GridLayout rows="*, auto">
-    <ListView height="100%" separatorColor="transparent" [items]="dockets" row="0">
+<StackLayout orientation="vertical" height="100%">
+    <ListView height="100%" separatorColor="transparent" [items]="courts" row="0">
         <ng-template let-item="item">
             <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
             <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
                 margin="5 10" padding="0">
                 <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
-                    [text]="item.name"></label>
+                    [text]="item.courtName"></label>
+                <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    [text]="item.url"></label>
+                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    [text]="item.jurisdiction"></label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+    <ListView height="1%" separatorColor="transparent" [items]="clusters" row="0">
+        <ng-template let-item="item">
+            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+            <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
+                margin="5 10" padding="0">
+                <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
+                    [text]="item.clusterName"></label>
                 <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
                     [text]="item.judge"></label>
                 <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
@@ -13,4 +27,4 @@
             </GridLayout>
         </ng-template>
     </ListView>
-</GridLayout>
+</StackLayout>

@@ -6,7 +6,7 @@ import { Page } from "@nativescript/core";
 
 @Component({
   moduleId: module.id,
-  selector: "ns-details",
+  selector: "ns-register",
   templateUrl: "register.component.html",
 })
 export class RegisterComponent {
