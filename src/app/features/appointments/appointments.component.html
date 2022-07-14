@@ -1,13 +1,24 @@
-<!-- <DatePicker year="1980" month="4" day="20"
-            [minDate]="minDate" [maxDate]="maxDate"
-            (dateChange)="onDateChanged($event)"
-            (dayChange)="onDayChanged($event)"
-            (monthChange)="onMonthChanged($event)"
-            (yearChange)="onYearChanged($event)"
-            (loaded)="onDatePickerLoaded($event)"
-            verticalAlignment="center">
-</DatePicker> -->
 <StackLayout>
-    <DatePickerField hint="select date" ></DatePickerField>
-    <TimePickerField hint="select time"></TimePickerField>
+    <StackLayout orientation="horizontal" padding="16" verticalAlignment="center">
+        <Label text="Select Court:" verticalAlignment="center" padding="0 10 0 0"></Label>
+        <DropDown class="appointment-dropdown"  itemsTextAlignment="center"
+            [items]="this.itemSource" [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)"
+            (opened)="onopen()" (closed)="onclose()" itemsPadding="5">
+        </DropDown>
+    </StackLayout>
+    <StackLayout orientation="horizontal" padding="0 16 0 16">
+        <Label text="Selected Index:" verticalAlignment="center" width="250px" padding="0"></Label>
+        <TextField [text]="selectedIndex" verticalAlignment="center" width="100%"></TextField>
+    </StackLayout>
+    <StackLayout orientation="horizontal" padding="0 16 0 16">
+        <Label text="Date:" verticalAlignment="center" width="250px" padding="0"></Label>
+        <DatePickerField hint="Select Date..." width="100%"></DatePickerField>
+    </StackLayout>
+    <StackLayout orientation="horizontal" padding="0 16 0 16">
+        <Label text="Time:" verticalAlignment="center" width="250px" padding="0"></Label>
+        <TimePickerField pickerTitle="Confirm predefined time selection" hint="Select Time..." pickerOkText="Approve" width="100%"></TimePickerField>
+    </StackLayout>
+    <DatePickerField [(ngModel)]="selectedDate" class="appointment-date" hint="Select Date"></DatePickerField>
+    <TimePickerField [(ngModel)]="selectedTime" class="appointment-time" hint="Select Time"></TimePickerField>
+    <Button text="Save" (tap)="onSave()" ></Button>
 </StackLayout>

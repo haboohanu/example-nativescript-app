@@ -23,6 +23,7 @@
     "@nstudio/nativescript-checkbox": "^2.0.5",
     "font-awesome": "^4.7.0",
     "nativescript-bottom-navigation": "^2.0.5",
+    "nativescript-drop-down": "^6.0.2",
     "nativescript-ngx-fonticon": "^7.0.0",
     "nativescript-ui-sidedrawer": "^10.0.2",
     "rxjs": "~7.5.0",
