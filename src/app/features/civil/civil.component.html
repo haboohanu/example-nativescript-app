@@ -1,30 +1,47 @@
+<ActionBar title="Civil" backgroundColor="white" color="#266fd9">
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <!-- <Label text="OC" class="action-label" fontSize="20px" color="orange" paddingRight="5" ></Label> -->
+        <Label text="Civil" class="action-label" fontSize="20px" color="#266fd9"></Label>
+    </StackLayout>
+</ActionBar>
+
 <StackLayout orientation="vertical" height="100%">
-    <ListView height="100%" separatorColor="transparent" [items]="courts" row="0">
-        <ng-template let-item="item">
-            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-            <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
-                margin="5 10" padding="0">
-                <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
-                    [text]="item.courtName"></label>
-                <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
-                    [text]="item.url"></label>
-                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
-                    [text]="item.jurisdiction"></label>
-            </GridLayout>
-        </ng-template>
-    </ListView>
-    <ListView height="1%" separatorColor="transparent" [items]="clusters" row="0">
-        <ng-template let-item="item">
-            <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-            <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
-                margin="5 10" padding="0">
-                <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
-                    [text]="item.clusterName"></label>
-                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
-                    [text]="item.judge"></label>
-                <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
-                    [text]="item.date"></label>
-            </GridLayout>
-        </ng-template>
-    </ListView>
-</StackLayout>
+    <!-- <CheckBox #CB1 width="300px" horizontalAlignment="left" [checked]="displayDetails">
+    </CheckBox> -->
+    <Button *ngIf="displayDetails" text="Hide Details" class="btn-primary" height="150px" width="800px" margin="20px"
+        (tap)="checkChanged()"></Button>
+    <Button *ngIf="!displayDetails" text="Show Details" class="btn-primary" height="150px" width="800px" margin="20px"
+        (tap)="checkChanged()"></Button>
+    <StackLayout orientation="vertical" height="100%">
+        <SearchBar hint="Filter Courts" [text]="searchPhrase" (textChange)="onTextChanged($event)"
+            (clear)="onClear($event)" (submit)="onSubmit($event)">
+        </SearchBar>
+        <ListView height="100%" separatorColor="transparent" [items]="filteredCourts" row="0">
+            <ng-template let-item="item">
+                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
+                    margin="5 10" padding="0">
+                    <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
+                        [text]="item.courtName"></label>
+                    <label *ngIf="displayDetails" row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                        [text]="item.url"></label>
+                    <label *ngIf="displayDetails" row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                        [text]="item.jurisdiction"></label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+        <ListView height="1%" separatorColor="transparent" [items]="clusters" row="0">
+            <ng-template let-item="item">
+                <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+                <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
+                    margin="5 10" padding="0">
+                    <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
+                        [text]="item.clusterName"></label>
+                    <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14" [text]="item.judge"></label>
+                    <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14" [text]="item.date"></label>
+                </GridLayout>
+            </ng-template>
+        </ListView>
+
+
+    </StackLayout>

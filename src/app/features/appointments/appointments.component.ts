@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "@nativescript/angular";
-import { DatePicker, EventData, Page, TimePicker } from "@nativescript/core";
+import { alert, DatePicker, EventData, Page, TimePicker } from "@nativescript/core";
 import { SelectedIndexChangedEventData } from "nativescript-drop-down";
 import { CourtModel } from "~/app/core/models/court.model";
+import { AppointmentModel } from "~/app/core/models/appointment.model";
 import { CourtService } from "~/app/core/services/court.service";
 import { ValueList, ValueItem, DropDown } from "nativescript-drop-down";
 import {
@@ -21,10 +22,12 @@ export class AppointmentsComponent {
   public items: Array<string>;
   selectedDate: Date;
   selectedTime: Date;
+  selectedCourt: CourtModel;
   courts: CourtModel[] = [];
+  itemSource: ValueList<CourtModel>;
   courtItems: ValueItem<CourtModel>[] = [];
 
-  public itemSource: ValueList<CourtModel>;
+  appointments: AppointmentModel[] = [];
 
   iitemSource = new ValueList<string>([
     { value: "FL", display: "Florida" },
@@ -37,7 +40,7 @@ export class AppointmentsComponent {
     private page: Page,
     private courtService: CourtService
   ) {
-    page.actionBarHidden = true;
+    //page.actionBarHidden = true;
     this.items = [];
     for (var i = 0; i < 5; i++) {
       this.items.push("data item " + i);
@@ -107,6 +110,7 @@ export class AppointmentsComponent {
       `Drop Down selected index changed from ${args.oldIndex} to ${args.newIndex}`
     );
     console.log("selected value:", this.itemSource.getValue(args.newIndex));
+    this.selectedCourt = this.itemSource.getValue(args.newIndex);
   }
 
   public onopen() {
@@ -121,17 +125,60 @@ export class AppointmentsComponent {
     const d = date.getDate();
     const m = date.getMonth() + 1;
     const y = date.getFullYear();
-    return (m < 10 ? "0" : "") + m + "." + (d < 10 ? "0" : "") + d + "." + y;
+    return (m < 10 ? "0" : "") + m + "/" + (d < 10 ? "0" : "") + d + "/" + y;
   }
 
   getFormattedTime(date: Date): string {
     const h = date.getHours();
     const m = date.getMinutes();
-    return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m;
+    let pm = false;
+    if(h >= 12){
+      pm = true;
+    }
+    return (h < 10 ? "0" : "") + (h <= 12 ? h : h - 12) + ":" + (m < 10 ? "0" : "") + m + (pm == true ? "PM" : "AM");
+    //return (h < 10 ? "0" : "") + h + ":" + (m < 10 ? "0" : "") + m + (pm == true ? "PM" : "AM");
   }
 
   onSave() {
     console.log(this.getFormattedDate(this.selectedDate));
     console.log(this.getFormattedTime(this.selectedTime));
+    console.log(this.selectedTime)
+    console.log(this.selectedTime)
+    let options = {
+      title: "Appointment Made",
+      message: `Appointment Made for \n${this.selectedCourt.courtName} \n${this.getFormattedDate(this.selectedDate)} \n${this.getFormattedTime(this.selectedTime)}`,
+      okButtonText: "OK",
+    };
+
+    alert(options).then(() => {
+      console.log("Appointment made!");
+      console.log(typeof(42.1))
+    });
+
+    let _appointment: AppointmentModel = {
+      courtName: this.selectedCourt.courtName,
+      date: this.selectedDate,
+      time: this.selectedTime
+    };
+
+    this.appointments.push(_appointment);
+    this.appointments.sort(this.compareAppointmentDateTime);
+  }
+
+  compareAppointmentDateTime(a: AppointmentModel, b: AppointmentModel){
+    if(a.date > b.date){
+      return 1
+    }
+    else if(a.date < b.date){
+      return -1
+    }
+    else{
+      if(a.time > b.time){
+        return 1
+      }
+      else{
+        return -1
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "@nativescript/angular";
-import { Page } from "@nativescript/core";
+import { action, ItemEventData, Page } from "@nativescript/core";
 import { CourtService } from "~/app/core/services/court.service";
 import { DocketModel } from "~/app/core/models/docket.model";
 
@@ -14,6 +14,9 @@ import { DocketModel } from "~/app/core/models/docket.model";
 export class SelfHelpComponent {
 
   dockets: DocketModel[] = []
+  filteredDockets: DocketModel[] = []
+  searchPhrase: String;
+  searchType: String;
 
   constructor(
     private routerExtensions: RouterExtensions,
@@ -22,7 +25,7 @@ export class SelfHelpComponent {
     private courtService: CourtService
   ) {
 
-    page.actionBarHidden = true;
+    //page.actionBarHidden = true;
   }
 
   ngOnInit(): void {
@@ -44,13 +47,58 @@ export class SelfHelpComponent {
           this.dockets.push(_docket);
         }
         console.log(this.dockets);
+        this.filteredDockets = this.dockets
       });
   }
 
+
+  onDocketTap(args: ItemEventData): void {
+    this.routerExtensions.navigate(["docketdetails", this.dockets[args.index].id]);
+  }
 
 
 
   onBack() {
     this.routerExtensions.navigate(["home"]);
+  }
+
+  onTextChangedName(event){
+    console.log(event.value);
+    this.filteredDockets = this.filterByDocketName(event.value)
+  }
+
+  onTextChangedNumber(event){
+    console.log(event.value);
+    this.filteredDockets = this.filterByDocketNumber(event.value)
+  }
+
+  onClear(event){
+
+  }
+
+  onSubmit(event){
+
+  }
+
+  filterByDocketName(query){
+    return this.dockets.filter( docket => docket.docketName.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  filterByDocketNumber(query){
+    return this.dockets.filter( docket => docket.docketNumber.toLowerCase().includes(query.toLowerCase()));
+  }
+
+  onSearchTap(){
+    let options = {
+      title: "Search selection",
+      message: "Choose docket search type",
+      cancelButtonText: "Cancel",
+      actions: ["Docket Name", "Docket Number"]
+  };
+
+  action(options).then((result) => {
+      console.log(result);
+      this.searchType = result;
+  });
   }
 }

@@ -1,5 +1,17 @@
+<ActionBar title="Self-Help" backgroundColor="white" color="#266fd9">
+    <StackLayout orientation="horizontal">
+        <Label text="Self-Help" class="action-label" fontSize="20px" color="#266fd9"></Label>
+
+    </StackLayout>
+    <ActionItem ios.systemIcon="2" android.systemIcon="ic_menu_search" ios.position="right" (tap)="onSearchTap()">
+    </ActionItem>
+</ActionBar>
 <StackLayout orientation="vertical" height="100%">
-    <ListView height="100%" separatorColor="transparent" [items]="dockets" row="0">
+    <SearchBar hint="Filter dockets by Name" *ngIf="searchType=='Docket Name'" (textChange)="onTextChangedName($event)">
+    </SearchBar>
+    <SearchBar hint="Filter dockets by Number" *ngIf="searchType=='Docket Number'" (textChange)="onTextChangedNumber($event)">
+    </SearchBar>
+    <ListView height="100%" separatorColor="transparent" [items]="filteredDockets" (itemTap)="onDocketTap($event)" row="0">
         <ng-template let-item="item">
             <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
             <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
@@ -8,8 +20,7 @@
                     [text]="item.docketName"></label>
                 <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
                     [text]="item.docketNumber"></label>
-                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
-                    [text]="item.court"></label>
+                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14" [text]="item.court"></label>
             </GridLayout>
         </ng-template>
     </ListView>
