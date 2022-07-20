@@ -5,6 +5,9 @@ import { RouterExtensions } from "@nativescript/angular";
 import { action, ItemEventData, Page } from "@nativescript/core";
 import { CourtService } from "~/app/core/services/court.service";
 import { DocketModel } from "~/app/core/models/docket.model";
+import { Store } from "@ngrx/store";
+import { getCurrentDocket, getCurrentFilter, State } from "./state/docket.reducer";
+import * as DocketActions from "./state/docket.actions"
 
 @Component({
   moduleId: module.id,
@@ -16,23 +19,32 @@ export class SelfHelpComponent {
   dockets: DocketModel[] = []
   filteredDockets: DocketModel[] = []
   searchPhrase: String;
-  searchType: String;
+  searchType: String | null;
+  currentDocket: DocketModel | null = null;
 
   constructor(
     private routerExtensions: RouterExtensions,
     private fb: FormBuilder,
     private page: Page,
-    private courtService: CourtService
+    private courtService: CourtService,
+    private store: Store<State>
   ) {
 
     //page.actionBarHidden = true;
   }
 
   ngOnInit(): void {
+    this.getCurrentDocket();
+    this.getCurrentFilter();
     this.getDockets();
+    if(this.currentDocket!=null){
+      this.routerExtensions.navigate(["docketdetails", this.currentDocket.id]);
+    }
+
   }
 
   getDockets() {
+    console.log("gettings dockets...")
     this.courtService
       .getDockets()
       .subscribe((res) => {
@@ -53,13 +65,8 @@ export class SelfHelpComponent {
 
 
   onDocketTap(args: ItemEventData): void {
+    this.setCurrentDocket(this.dockets[args.index])
     this.routerExtensions.navigate(["docketdetails", this.dockets[args.index].id]);
-  }
-
-
-
-  onBack() {
-    this.routerExtensions.navigate(["home"]);
   }
 
   onTextChangedName(event){
@@ -70,14 +77,6 @@ export class SelfHelpComponent {
   onTextChangedNumber(event){
     console.log(event.value);
     this.filteredDockets = this.filterByDocketNumber(event.value)
-  }
-
-  onClear(event){
-
-  }
-
-  onSubmit(event){
-
   }
 
   filterByDocketName(query){
@@ -98,7 +97,35 @@ export class SelfHelpComponent {
 
   action(options).then((result) => {
       console.log(result);
-      this.searchType = result;
+      //this.searchType = result;
+      this.setCurrentFilter(result);
   });
   }
+
+  getCurrentDocket(){
+    this.store
+    .select(getCurrentDocket)
+    .subscribe((currentDocket) => (this.currentDocket = currentDocket));
+    console.log("CURRENT DOCKET:", this.currentDocket);
+  }
+
+  setCurrentDocket(docket: DocketModel) {
+    this.store.dispatch(
+      DocketActions.setCurrentDocket({ docket })
+    );
+  }
+
+  getCurrentFilter(){
+    this.store
+    .select(getCurrentFilter)
+    .subscribe((currentFilter) => (this.searchType = currentFilter));
+    console.log("CURRENT Filter:", this.searchType);
+  }
+
+  setCurrentFilter(filter: String) {
+    this.store.dispatch(
+      DocketActions.setCurrentFilter({ filter })
+    );
+  }
+
 }

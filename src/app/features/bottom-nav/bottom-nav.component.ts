@@ -4,6 +4,9 @@ import {
   TabSelectedEventData,
   TabPressedEventData,
 } from "@nativescript-community/ui-material-bottomnavigationbar";
+import { Store } from "@ngrx/store";
+import { State, getCurrentDocket } from "../self-help/state/docket.reducer";
+import { DocketModel } from "~/app/core/models/docket.model";
 
 @Component({
   moduleId: module.id,
@@ -11,15 +14,31 @@ import {
   templateUrl: "bottom-nav.component.html",
 })
 export class BottomNavComponent {
-  constructor(private routerExtensions: RouterExtensions) {}
+
+  currentDocket: DocketModel | null = null;
+
+  constructor(
+    private routerExtensions: RouterExtensions,
+    private store: Store<State>
+  ) {}
+
+  ngOnInit(): void {
+  }
 
   onBottomNavigationTabSelected(event: TabSelectedEventData) {
+    this.getCurrentDocket();
+
     switch (event.newIndex) {
       case 0:
         this.routerExtensions.navigate(["home"]);
         break;
       case 1:
-        this.routerExtensions.navigate(["selfhelp"]);
+        if(this.currentDocket!=null){
+          this.routerExtensions.navigate(["docketdetails", this.currentDocket.id]);
+        }
+        else{
+          this.routerExtensions.navigate(["selfhelp"]);
+        }
         break;
       case 2:
         this.routerExtensions.navigate(["civil"]);
@@ -32,4 +51,12 @@ export class BottomNavComponent {
         break;
     }
   }
+
+  getCurrentDocket(){
+    this.store
+    .select(getCurrentDocket)
+    .subscribe((currentDocket) => (this.currentDocket = currentDocket));
+    console.log("CURRENT DOCKET:", this.currentDocket);
+  }
+
 }

@@ -9,9 +9,9 @@
     <!-- <CheckBox #CB1 width="300px" horizontalAlignment="left" [checked]="displayDetails">
     </CheckBox> -->
     <Button *ngIf="displayDetails" text="Hide Details" class="btn-primary" height="150px" width="800px" margin="20px"
-        (tap)="checkChanged()"></Button>
+        (tap)="checkChanged()" borderRadius="10"></Button>
     <Button *ngIf="!displayDetails" text="Show Details" class="btn-primary" height="150px" width="800px" margin="20px"
-        (tap)="checkChanged()"></Button>
+        (tap)="checkChanged()" borderRadius="10"></Button>
     <StackLayout orientation="vertical" height="100%">
         <SearchBar hint="Filter Courts" [text]="searchPhrase" (textChange)="onTextChanged($event)"
             (clear)="onClear($event)" (submit)="onSubmit($event)">

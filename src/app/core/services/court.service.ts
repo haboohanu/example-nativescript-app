@@ -43,6 +43,7 @@ export class CourtService {
         })),
         tap((res) => {
           if (res) {
+            console.log(res);
             return of(true); // getRequest successful
           }
         })

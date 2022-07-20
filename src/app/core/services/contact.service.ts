@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { catchError, Observable, of, tap, throwError } from "rxjs";
+import { catchError, map, of, tap, throwError } from "rxjs";
+import { ContactModel } from "../models/contact.model";
 
 @Injectable({
   providedIn: "root",
@@ -16,11 +17,14 @@ export class ContactService {
   getContacts() {
     let options = this.createRequestOptions();
     return this.http
-      .get<any[]>("https://api.github.com/users/haboohanu", { headers: options })
+      .get<any>("https://randomuser.me/api/?results=25", { headers: options })
       .pipe(
         catchError((error: Error) => {
           return throwError(() => new Error(`Error Message:${error.message} \nError ${error.name}`));
         }),
+        map((response) => ({
+          results: response.results,
+        })),
         tap((res) => {
           if (res) {
             console.log(res);

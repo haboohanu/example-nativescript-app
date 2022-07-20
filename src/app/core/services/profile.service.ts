@@ -16,7 +16,7 @@ export class ProfileService {
   getProfile() {
     let options = this.createRequestOptions();
     return this.http
-      .get<any>("https://randomuser.me/api/", { headers: options })
+      .get<any>("https://randomuser.me/api/?seed=2d2be7e40a821fe2", { headers: options })
       .pipe(
         catchError((error: Error) => {
           return throwError(() => new Error(`Error Message:${error.message} \nError ${error.name}`));

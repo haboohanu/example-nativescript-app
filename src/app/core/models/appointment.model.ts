@@ -1,6 +1,10 @@
+import { ContactModel } from "./contact.model";
+import { CourtModel } from "./court.model";
+
 export interface AppointmentModel{
-  courtName: string;
+  court: CourtModel;
   date: Date;
   time: Date;
+  judge: ContactModel
 
 }

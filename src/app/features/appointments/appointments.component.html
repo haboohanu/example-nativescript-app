@@ -8,35 +8,34 @@
 <StackLayout>
     <StackLayout orientation="horizontal" padding="16" verticalAlignment="center">
         <Label text="Select Court:" verticalAlignment="center" padding="0 10 0 0"></Label>
-        <DropDown class="appointment-dropdown" itemsTextAlignment="center" [items]="this.itemSource"
-            [(ngModel)]="selectedIndex" (selectedIndexChanged)="onchange($event)" (opened)="onopen()"
-            (closed)="onclose()" itemsPadding="5">
+        <DropDown class="appointment-dropdown" itemsTextAlignment="center" [items]="this.courtItemSource"
+            [(ngModel)]="selectedCourtIndex" (selectedIndexChanged)="onCourtChange($event)" itemsPadding="5"
+            width="100%">
         </DropDown>
     </StackLayout>
-    <!-- <StackLayout orientation="horizontal" padding="0 16 0 16">
-        <Label text="Selected Index:" verticalAlignment="center" width="250px" padding="0"></Label>
-        <TextField [text]="selectedIndex" verticalAlignment="center" width="100%"></TextField>
-    </StackLayout> -->
-    <!-- <StackLayout orientation="horizontal" padding="0 16 0 16">
-        <Label text="Date:" verticalAlignment="center" width="250px" padding="0"></Label>
-        <DatePickerField hint="Select Date..." width="100%"></DatePickerField>
+    <StackLayout orientation="horizontal" padding="16" verticalAlignment="center">
+        <Label text="Select Judge:" verticalAlignment="center" padding="0 10 0 0"></Label>
+        <DropDown class="appointment-dropdown" itemsTextAlignment="center" [items]="this.contactItemSource"
+            [(ngModel)]="selectedContactIndex" (selectedIndexChanged)="onContactChange($event)" itemsPadding="5"
+            width="100%">
+        </DropDown>
     </StackLayout>
-    <StackLayout orientation="horizontal" padding="0 16 0 16">
-        <Label text="Time:" verticalAlignment="center" width="250px" padding="0"></Label>
-        <TimePickerField pickerTitle="Confirm predefined time selection" hint="Select Time..." pickerOkText="Approve" width="100%"></TimePickerField>
-    </StackLayout> -->
     <DatePickerField [(ngModel)]="selectedDate" class="appointment-date" hint="Select Date"></DatePickerField>
     <TimePickerField [(ngModel)]="selectedTime" class="appointment-time" hint="Select Time"></TimePickerField>
     <Button text="Create Appointment" (tap)="onSave()" padding="10" borderRadius="10"></Button>
     <ListView height="100%" separatorColor="transparent" [items]="appointments" row="0">
         <ng-template let-item="item">
             <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
-            <GridLayout height="280" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
+            <GridLayout height="100%" rows="*, auto, auto" columns="*" class="bg-secondary" borderRadius="10"
                 margin="5 10" padding="0">
                 <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
-                    [text]="item.courtName"></label>
-                <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14" [text]="this.getFormattedDate(item.date)"></label>
-                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14" [text]="this.getFormattedTime(item.time)"></label>
+                    [text]="item.court.courtName"></label>
+                <label row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    [text]="item.judge.name"></label>
+                <label row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    [text]="this.getFormattedDate(item.date) + ', ' + this.getFormattedTime(item.time)"></label>
+                <!-- <label row="3" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    [text]="this.getFormattedTime(item.time)"></label> -->
             </GridLayout>
         </ng-template>
     </ListView>

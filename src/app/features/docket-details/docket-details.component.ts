@@ -5,6 +5,9 @@ import { RouterExtensions } from "@nativescript/angular";
 import { action, Page } from "@nativescript/core";
 import { CourtService } from "../../core/services/court.service";
 import { DocketModel } from "../../core/models/docket.model";
+import { Store } from "@ngrx/store";
+import { State } from "../self-help/state/docket.reducer";
+import * as DocketActions from "../self-help/state/docket.actions"
 
 @Component({
   moduleId: module.id,
@@ -19,7 +22,8 @@ export class DocketDetailsComponent {
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
     private page: Page,
-    private courtService: CourtService
+    private courtService: CourtService,
+    private store: Store<State>
   ) {
     //page.actionBarHidden = true;
   }
@@ -44,7 +48,8 @@ export class DocketDetailsComponent {
   }
 
   onBack() {
-    this.routerExtensions.navigate(["selfhelp"]);
+    this.setCurrentDocket(null);
+    this.routerExtensions.navigate(['selfhelp'])
   }
 
   onSearchTap() {
@@ -58,5 +63,11 @@ export class DocketDetailsComponent {
     action(options).then((result) => {
       console.log(result);
     });
+  }
+
+  setCurrentDocket(docket: DocketModel | null) {
+    this.store.dispatch(
+      DocketActions.setCurrentDocket({ docket })
+    );
   }
 }
