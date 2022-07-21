@@ -17,7 +17,7 @@ export class ContactService {
   getContacts() {
     let options = this.createRequestOptions();
     return this.http
-      .get<any>("https://randomuser.me/api/?results=25", { headers: options })
+      .get<any>("https://randomuser.me/api/?results=10", { headers: options })
       .pipe(
         catchError((error: Error) => {
           return throwError(() => new Error(`Error Message:${error.message} \nError ${error.name}`));

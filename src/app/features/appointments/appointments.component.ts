@@ -10,11 +10,13 @@ import { CourtService } from "~/app/core/services/court.service";
 import { ValueList, ValueItem } from "nativescript-drop-down";
 import { Store } from "@ngrx/store";
 import {
+  getContacts,
   getShowAppointmentsList,
   State,
 } from "../appointments/state/appointment.reducer";
 import * as AppointmentActions from "./state/appointment.actions";
 import { ContactService } from "~/app/core/services/contact.service";
+import { Observable } from "rxjs";
 
 @Component({
   moduleId: module.id,
@@ -37,14 +39,17 @@ export class AppointmentsComponent {
   contactItemSource: ValueList<ContactModel>;
   contactItems: ValueItem<ContactModel>[] = [];
 
-  appointments: AppointmentModel[] = [];
+  //appointments: AppointmentModel[] = [];
+
+  contacts$: Observable<any>;
+  appointments$: Observable<AppointmentModel[]>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private routerExtensions: RouterExtensions,
     private page: Page,
     private courtService: CourtService,
-    private contactService: ContactService,
+    // private contactService: ContactService,
     private store: Store<State>
   ) {
     //page.actionBarHidden = true;
@@ -52,8 +57,13 @@ export class AppointmentsComponent {
 
   ngOnInit(): void {
     this.getCourts();
-    this.getContacts();
+    //this.getContacts();
     this.getShowAppointmentsList();
+
+    this.contacts$ = this.store.select(getContacts);
+
+    this.store.dispatch(AppointmentActions.loadContacts());
+    this.getContact();
   }
 
   getCourts() {
@@ -75,8 +85,26 @@ export class AppointmentsComponent {
     });
   }
 
-  getContacts() {
-    this.contactService.getContacts().subscribe((res) => {
+  // getContacts() {
+  //   this.contactService.getContacts().subscribe((res) => {
+  //     for (let c of res.results) {
+  //       let _contact: ContactModel = {
+  //         name: `${c.name.title} ${c.name.first} ${c.name.last}`,
+  //         email: c.email,
+  //         phone: c.phone,
+  //       };
+  //       let item: ValueItem<ContactModel> = {
+  //         value: _contact,
+  //         display: _contact.name,
+  //       };
+  //       this.contactItems.push(item);
+  //     }
+  //     this.contactItemSource = new ValueList<ContactModel>(this.contactItems);
+  //   });
+  // }
+
+  getContact() {
+    this.contacts$.subscribe((res) => {
       for (let c of res.results) {
         let _contact: ContactModel = {
           name: `${c.name.title} ${c.name.first} ${c.name.last}`,
@@ -146,8 +174,7 @@ export class AppointmentsComponent {
     console.log(this.selectedTime);
     let options = {
       title: "Appointment Made",
-      message: `Appointment Made for
-      \n${this.selectedCourt.courtName}
+      message: `\n${this.selectedCourt.courtName}
       \n${this.selectedContact.name}
       \n${this.getFormattedDate(this.selectedDate)}
       \n${this.getFormattedTime(this.selectedTime)}`,
@@ -163,9 +190,8 @@ export class AppointmentsComponent {
       judge: this.selectedContact,
       date: this.selectedDate,
       time: this.selectedTime,
-
     };
-    console.log(this.appointments);
+    //console.log(this.appointments);
     this.addToAppointmentList(_appointment);
   }
 
@@ -184,9 +210,7 @@ export class AppointmentsComponent {
   }
 
   getShowAppointmentsList() {
-    this.store
-      .select(getShowAppointmentsList)
-      .subscribe((appointments) => (this.appointments = appointments));
+    this.appointments$ = this.store.select(getShowAppointmentsList);
   }
 
   addToAppointmentList(appointment: AppointmentModel) {

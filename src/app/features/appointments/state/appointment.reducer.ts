@@ -57,9 +57,15 @@ const initialState: AppointmentState = {
 const getAppointmentFeatureState =
   createFeatureSelector<AppointmentState>("appointments");
 
+
 export const getShowAppointmentsList = createSelector(
   getAppointmentFeatureState,
   (state) => state.appointments
+);
+
+export const getContacts = createSelector(
+  getAppointmentFeatureState,
+  (state) => state.contacts
 );
 
 export const appointmentReducer = createReducer<AppointmentState>(

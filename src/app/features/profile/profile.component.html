@@ -29,7 +29,7 @@
                             <Label *ngIf="item.name=='Sign Out'" [text]="item.name" class="list-group-item center-text"
                                 fontFamily='Roboto-Regular' width="100%" textAlignment="center" (tap)="onSignOut()"></Label>
                             <Label *ngIf="item.name!='fill' && item.name!='Sign Out'" [text]="item.name"
-                                class="list-group-item" fontFamily='Roboto-Regular' width="90%"></Label>
+                                class="list-group-item" fontFamily='Roboto-Regular' width="90%" (tap)="onTapNavigate(item.endpoint)"></Label>
                             <Image *ngIf="item.name!='fill' && item.name!='Sign Out'" [src]='item.arrow'
                                 stretch="aspectFit" height="15"></Image>
 

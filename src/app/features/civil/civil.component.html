@@ -8,12 +8,12 @@
 <StackLayout orientation="vertical" height="100%">
     <!-- <CheckBox #CB1 width="300px" horizontalAlignment="left" [checked]="displayDetails">
     </CheckBox> -->
-    <Button *ngIf="displayDetails" text="Hide Details" class="btn-primary" height="150px" width="800px" margin="20px"
+    <Button *ngIf="displayDetails$ | async" text="Hide Details" class="btn-primary" height="150px" width="800px" margin="20px"
         (tap)="checkChanged()" borderRadius="10"></Button>
-    <Button *ngIf="!displayDetails" text="Show Details" class="btn-primary" height="150px" width="800px" margin="20px"
+    <Button *ngIf="!(displayDetails$ | async)" text="Show Details" class="btn-primary" height="150px" width="800px" margin="20px"
         (tap)="checkChanged()" borderRadius="10"></Button>
     <StackLayout orientation="vertical" height="100%">
-        <SearchBar hint="Filter Courts" [text]="searchPhrase" (textChange)="onTextChanged($event)"
+        <SearchBar hint="Filter Courts" (textChange)="onTextChanged($event)"
             (clear)="onClear($event)" (submit)="onSubmit($event)">
         </SearchBar>
         <ListView height="100%" separatorColor="transparent" [items]="filteredCourts" row="0">
@@ -23,9 +23,9 @@
                     margin="5 10" padding="0">
                     <label row="0" margin="10 10 0 10" fontWeight="700" class="text-primary" fontSize="18"
                         [text]="item.courtName"></label>
-                    <label *ngIf="displayDetails" row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    <label *ngIf="displayDetails$ | async" row="1" margin="0 10 10 10" class="text-secondary" fontSize="14"
                         [text]="item.url"></label>
-                    <label *ngIf="displayDetails" row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
+                    <label *ngIf="displayDetails$ | async" row="2" margin="0 10 10 10" class="text-secondary" fontSize="14"
                         [text]="item.jurisdiction"></label>
                 </GridLayout>
             </ng-template>

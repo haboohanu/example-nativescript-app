@@ -13,7 +13,7 @@ const items = new Array<any>(
   { name: "Appointment History", arrow: arrow, color: "white" },
   { name: "Payment History", arrow: arrow, color: "white" },
   { name: "fill", color: "#f5f5f5" },
-  { name: "Terms & Conditions", arrow: arrow, color: "white" },
+  { name: "Terms & Conditions", endpoint:'profile/terms', arrow: arrow, color: "white" },
   { name: "Help", arrow: arrow, color: "white" },
   { name: "Privacy Policy", arrow: arrow, color: "white" },
   { name: "fill", color: "#f5f5f5" },
@@ -86,5 +86,9 @@ export class ProfileComponent {
   onSignOut() {
     this.authService.setLoggedIn(false);
     this.routerExtensions.navigate(["login"]);
+  }
+
+  onTapNavigate(endpoint: String){
+    this.routerExtensions.navigate([endpoint]);
   }
 }

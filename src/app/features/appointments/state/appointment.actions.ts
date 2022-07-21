@@ -16,8 +16,13 @@ export const loadContacts = createAction(
 )
 
 export const loadContactsSuccess = createAction(
-  '[Appointment] Load Contacts',
+  '[Appointment] Load Contacts Success',
   props<{contacts: any }>()
+)
+
+export const loadContactsFailure = createAction(
+  '[Appointment] Load Contacts Success',
+  props<{error: String }>()
 )
 
 // export const setCurrentCourt = createAction(

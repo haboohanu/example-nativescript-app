@@ -56,7 +56,6 @@ export class BottomNavComponent {
     this.store
     .select(getCurrentDocket)
     .subscribe((currentDocket) => (this.currentDocket = currentDocket));
-    console.log("CURRENT DOCKET:", this.currentDocket);
   }
 
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouterExtensions } from "@nativescript/angular";
 import { Page } from "@nativescript/core";
-import { map } from "rxjs";
+import { map, Observable } from "rxjs";
 import { CourtService } from "~/app/core/services/court.service";
 import { ClusterModel } from "~/app/core/models/cluster.model";
 import { CourtModel } from "~/app/core/models/court.model";
@@ -18,9 +18,8 @@ export class CivilComponent implements OnInit {
   clusters: ClusterModel[] = [];
   courts: CourtModel[] = [];
   filteredCourts: CourtModel[] = [];
-  displayDetails: boolean;
   checked: boolean;
-  searchPhrase: "SUPREME";
+  displayDetails$: Observable<boolean>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,7 +44,7 @@ export class CivilComponent implements OnInit {
           id: c.id,
           clusterName: c.case_name,
           date: c.date_filed,
-          judge: c.judges
+          judge: c.judges,
         };
         this.clusters.push(_cluster);
       }
@@ -59,7 +58,7 @@ export class CivilComponent implements OnInit {
           id: c.id,
           courtName: c.full_name,
           url: c.url,
-          jurisdiction: c.jurisdiction
+          jurisdiction: c.jurisdiction,
         };
         this.courts.push(_court);
       }
@@ -69,32 +68,25 @@ export class CivilComponent implements OnInit {
   }
 
   getShowCourtDetails() {
-    this.store
-      .select(getShowCourtDetails)
-      .subscribe(
-        (showCourtDetails) => (this.displayDetails = showCourtDetails)
-      );
+    this.displayDetails$ = this.store.select(getShowCourtDetails);
   }
 
   checkChanged() {
     this.store.dispatch(CourtActions.toggleCourtDetails());
   }
 
-  onTextChanged(event){
+  onTextChanged(event) {
     console.log(event.value);
-    this.filteredCourts = this.filterByCourtName(event.value)
+    this.filteredCourts = this.filterByCourtName(event.value);
   }
 
-  onClear(event){
+  onClear(event) {}
 
+  onSubmit(event) {}
+
+  filterByCourtName(query) {
+    return this.courts.filter((court) =>
+      court.courtName.toLowerCase().includes(query.toLowerCase())
+    );
   }
-
-  onSubmit(event){
-
-  }
-
-  filterByCourtName(query){
-    return this.courts.filter( court => court.courtName.toLowerCase().includes(query.toLowerCase()));
-  }
-
 }

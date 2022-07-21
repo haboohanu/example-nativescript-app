@@ -20,7 +20,7 @@ export class SelfHelpComponent {
   filteredDockets: DocketModel[] = []
   searchPhrase: String;
   searchType: String | null;
-  currentDocket: DocketModel | null = null;
+  //currentDocket: DocketModel | null = null;
 
   constructor(
     private routerExtensions: RouterExtensions,
@@ -34,12 +34,8 @@ export class SelfHelpComponent {
   }
 
   ngOnInit(): void {
-    this.getCurrentDocket();
     this.getCurrentFilter();
     this.getDockets();
-    if(this.currentDocket!=null){
-      this.routerExtensions.navigate(["docketdetails", this.currentDocket.id]);
-    }
 
   }
 
@@ -70,12 +66,10 @@ export class SelfHelpComponent {
   }
 
   onTextChangedName(event){
-    console.log(event.value);
     this.filteredDockets = this.filterByDocketName(event.value)
   }
 
   onTextChangedNumber(event){
-    console.log(event.value);
     this.filteredDockets = this.filterByDocketNumber(event.value)
   }
 
@@ -97,16 +91,8 @@ export class SelfHelpComponent {
 
   action(options).then((result) => {
       console.log(result);
-      //this.searchType = result;
       this.setCurrentFilter(result);
   });
-  }
-
-  getCurrentDocket(){
-    this.store
-    .select(getCurrentDocket)
-    .subscribe((currentDocket) => (this.currentDocket = currentDocket));
-    console.log("CURRENT DOCKET:", this.currentDocket);
   }
 
   setCurrentDocket(docket: DocketModel) {
@@ -119,7 +105,6 @@ export class SelfHelpComponent {
     this.store
     .select(getCurrentFilter)
     .subscribe((currentFilter) => (this.searchType = currentFilter));
-    console.log("CURRENT Filter:", this.searchType);
   }
 
   setCurrentFilter(filter: String) {

@@ -3,14 +3,14 @@ import {
   NativeScriptHttpClientModule,
   NativeScriptModule,
 } from "@nativescript/angular";
-//import { EffectsModule } from "@ngrx/effects";
+import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { TNSFontIconModule } from "nativescript-ngx-fonticon";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { BottomNavComponent } from "./features/bottom-nav/bottom-nav.component";
-//import { CourtEffects } from "./features/civil/state/court.effects"
+import { docketReducer } from "./features/self-help/state/docket.reducer";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -22,7 +22,8 @@ import { BottomNavComponent } from "./features/bottom-nav/bottom-nav.component";
       fa: "./assets/css/font-awesome.css",
     }),
     StoreModule.forRoot({}, {}),
-    //EffectsModule.forRoot([CourtEffects]),
+    StoreModule.forFeature('dockets', docketReducer),
+    EffectsModule.forRoot([]),
   ],
   declarations: [AppComponent, BottomNavComponent],
   providers: [],

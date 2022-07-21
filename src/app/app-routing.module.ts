@@ -27,7 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'civil',
-    loadChildren: () => import('./features/civil/civil.module').then(m => m.CivilModule)
+    loadChildren: () => import('./features/civil/civil.module').then(m => m.CivilModule),
+    //outlet: 'civil'
   },
   {
     path: 'contacts',
